@@ -23,3 +23,37 @@
     }
   }
 }
+
+@media only screen and (max-width: 1100px) {
+  .alert-wrapper {
+    .alert-header {
+      h3 {
+        font-size: 19px;
+      }
+    }
+
+    .alert-content {
+      p {
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 891px) {
+  .alert-wrapper {
+    margin-top: 20px;
+    
+    .alert-header {
+      h3 {
+        font-size: 18px;
+      }
+    }
+
+    .alert-content {
+      p {
+        font-size: 15px;
+      }
+    }
+  }
+}

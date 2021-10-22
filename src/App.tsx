@@ -20,9 +20,9 @@ const App = () => {
   const [showNotes, setShowNotes] = useState(false)
 
   const months = 12;
-  let monthsArr:any = [];
+  let monthsArr: any = [];
 
-  for (let i = 1; i <= months; i++ ) {
+  for (let i = 1; i <= months; i++) {
     monthsArr.push(i);
   }
 
@@ -35,8 +35,8 @@ const App = () => {
     window.addEventListener("resize", handleResize);
   }, []);
 
-  const setNameMonth = (monthNumber:any) => {
-    switch(monthNumber) {
+  const setNameMonth = (monthNumber: any) => {
+    switch (monthNumber) {
       case 1:
         return "Styczeń";
       case 2:
@@ -45,15 +45,15 @@ const App = () => {
         return "Marzec";
       case 4:
         return "Kwiecień";
-      case 5: 
+      case 5:
         return "Maj";
       case 6:
         return "Czerwiec";
       case 7:
         return "Lipiec";
-      case 8: 
+      case 8:
         return "Sierpień";
-      case 9: 
+      case 9:
         return "Wrzesień";
       case 10:
         return "Październik";
@@ -99,22 +99,22 @@ const App = () => {
   }
 
   return (
-    <div style={{position: "relative"}} >
+    <div style={{ position: "relative" }} >
       <div className="notes-wrapper">
         {!showNotes && <p className="shortcut" onClick={() => setShowNotes(prevState => !prevState)}>Notatki</p>}
-        {showNotes && <Notes setShowNotes={setShowNotes}/>}
+        {showNotes && <Notes setShowNotes={setShowNotes} />}
       </div>
-      <div className="main-wrapper" style={{filter: showNotes ? "blur(5px)" : "none", pointerEvents: showNotes ? "none" : "unset"}}>
+      <div className="main-wrapper" style={{ filter: showNotes ? "blur(5px)" : "none", pointerEvents: showNotes ? "none" : "unset" }}>
         <div className="title">
           <h1>Kalendarz / Planner</h1>
           <div className="details">
-            <img src={arrow} alt="previous" onClick={() => prevMonth()}/>
-            <p>{setNameMonth(date.month)} {width < 769 && "/"} {width < 769 && setNameMonth(date.month + 1)}/{date.year}</p>
-            <img src={arrow} alt="next" onClick={() => nextMonth()}/>
+            <img src={arrow} alt="previous" onClick={() => prevMonth()} />
+            <p>{setNameMonth(date.month)} {width < 769 && "/ "} {width < 769 && setNameMonth(date.month + 1)} / {date.year}</p>
+            <img src={arrow} alt="next" onClick={() => nextMonth()} />
           </div>
         </div>
         <WeekBar />
-        {monthsArr.map((month:any) => <SingleMonth key={month} month={month} date={date}/>)}
+        {monthsArr.map((month: any) => <SingleMonth key={month} month={month} date={date} />)}
       </div>
     </div>
   );
