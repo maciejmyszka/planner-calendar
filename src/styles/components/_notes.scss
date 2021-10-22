@@ -1,0 +1,45 @@
+.notes-feature {
+  background-color: #212121;
+  width: 30vw;
+  height: 90vh;
+  border: 2px solid white;
+  padding: 20px;
+  margin-right: -2px;
+  border-bottom-left-radius: 40px;
+  border-top-left-radius: 40px;
+
+  .top-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h2 {
+      color: white;
+    }
+
+    img {
+      height: auto;
+      width: 30px;
+      cursor: pointer;
+    }
+  }
+
+  .actions {
+    display: flex;
+    margin-top: 20px;
+
+    p {
+      width: 50%;
+      text-align: center;
+      padding: 5px 10px;
+      border: 1px solid white;
+      color: white;
+      cursor: pointer;
+    }
+
+    .choosed {
+      background-color: white;
+      color: black;
+    }
+  }
+}

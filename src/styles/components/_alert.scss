@@ -1,0 +1,25 @@
+.alert-wrapper {
+  margin-top: 30px;
+  padding: 5px;
+  border: 2px solid #E72020;
+
+  .alert-header {
+    display: flex;
+    justify-content: space-between;
+
+    h3 {
+      color: #E72020;
+      font-size: 20px;
+    }
+
+    img {
+      cursor: pointer;
+    }
+  }
+
+  .alert-content {
+    p {
+      font-size: 18px;
+    }
+  }
+}

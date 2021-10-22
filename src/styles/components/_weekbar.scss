@@ -1,0 +1,25 @@
+.weekbar {
+  display: flex;
+  width: 100%;
+  position: relative;
+  padding: 10px 0;
+
+  p {
+    font-size: 18px;
+    width: 14%;
+    text-align: center;
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+    padding: 5px 0;
+    color: black;
+    background-color: white;
+  }
+
+  p:first-of-type {
+    border-left: 3px solid white;
+  }
+
+  p:last-of-type {
+    border-right: 3px solid white;
+  }
+}

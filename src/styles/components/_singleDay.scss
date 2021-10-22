@@ -1,0 +1,257 @@
+#a12,
+#a19 {
+  margin-left: 28%;
+}
+
+#a13,
+#a110ab {
+  margin-left: 56%;
+}
+
+#a14,
+#a111ab {
+  margin-left: 84%;
+}
+
+#a15,
+#a112ab {
+  margin-left: 14%;
+}
+
+#a16 {
+  margin-left: 42%;
+}
+
+#a17 {
+  margin-left: 70%;
+}
+
+.day-wrapper {
+  width: 14%;
+  height: 120px;
+  border: 2px solid white;
+  cursor: pointer;
+  background: rgb(57, 57, 57);
+  background: radial-gradient(
+    circle,
+    rgba(57, 57, 57, 0.6) 0%,
+    rgba(0, 0, 0, 1) 100%
+  );
+  background-position: right;
+  background-size: 150%;
+  transition: background-position 0.5s ease;
+  z-index: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+
+  .day-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+
+    h2 {
+      text-align: center;
+      padding: 6px 8px;
+      margin: 5px;
+    }
+  }
+
+  .tasks {
+    text-align: center;
+
+    p {
+      margin: 0;
+      padding: 0;
+      font-size: 15px;
+    }
+  }
+
+  .today {
+    border-radius: 50%;
+    background-color: white;
+    color: black;
+  }
+}
+
+.day-wrapper:first-of-type {
+  border-left: 3px solid white;
+}
+
+.day-wrapper:last-of-type {
+  border-right: 3px solid white;
+}
+
+.day-wrapper:hover {
+  background-position: left;
+}
+
+@media only screen and (max-width: 1366px) {
+  .day-wrapper {
+    .day-number {
+      h2 {
+        font-size: 20px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .day-wrapper {
+    .day-number {
+      h2 {
+        font-size: 19px;
+      }
+    }
+
+    .tasks {
+      p {
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .day-wrapper {
+    height: 110px;
+
+    .day-number {
+      h2 {
+        font-size: 17px;
+      }
+    }
+
+    .tasks {
+      p {
+        font-size: 13px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 880px) {
+  .day-wrapper {
+    height: 100px;
+
+    .day-number {
+      h2 {
+        font-size: 16px;
+      }
+    }
+
+    .tasks {
+      p {
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .day-wrapper {
+    height: 87px;
+
+    .day-number {
+      h2 {
+        font-size: 14px;
+        margin: 4px;
+      }
+    }
+
+    .tasks {
+      p {
+        font-size: 11px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .day-wrapper {
+    height: 80px;
+
+    .day-number {
+      h2 {
+        font-size: 15px;
+      }
+    }
+
+    .tasks {
+      p {
+        font-size: 10px;
+      }
+
+      .tasksNum {
+        margin-top: 15px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .day-wrapper {
+    height: 75px;
+
+    .day-number {
+      h2 {
+        font-size: 14px;
+      }
+
+      .today {
+        padding: 4px 5px;
+      }
+    }
+
+    .tasks {
+      .tasksNum {
+        margin-top: 15px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  .day-wrapper {
+    height: 70px;
+
+    .day-number {
+      h2 {
+        font-size: 14px;
+      }
+
+      .today {
+        padding: 4px 5px;
+      }
+    }
+
+    .tasks {
+      p {
+        font-size: 9px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 470px) {
+  .day-wrapper {
+    height: 65px;
+
+    .day-number {
+      h2 {
+        font-size: 12px;
+      }
+    }
+
+    .tasks {
+
+      p {
+        padding: 0 3px;
+      }
+
+      .tasksNum {
+        margin-top: 2px;
+      }
+    }
+  }
+}

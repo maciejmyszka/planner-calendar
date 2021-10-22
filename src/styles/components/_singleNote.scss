@@ -1,0 +1,25 @@
+.single-note-wrapper:first-of-type {
+  margin-top: 20px;
+}
+
+.single-note-wrapper {
+  border: 1px solid white;
+  color: white;
+  margin: 20px 0;
+
+  .note-header {
+    background-color: white;
+    color: #333;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+
+    img {
+      cursor: pointer;
+    }
+  }
+
+  .text {
+    padding: 10px 5px;
+  }
+}

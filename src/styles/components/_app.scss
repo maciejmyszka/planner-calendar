@@ -1,0 +1,169 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Varela Round", sans-serif;
+}
+
+.notes-wrapper {
+  position: absolute;
+  right: 0;
+  color: #333;
+  z-index: 1;
+  top: 30px;
+
+  .shortcut {
+    transform: rotate(270deg);
+    padding: 10px 15px;
+    background-color: white;
+    cursor: pointer;
+    margin-right: -23px;
+  }
+}
+
+.main-wrapper {
+  max-width: 1600px;
+  margin: 50px auto;
+
+  .title {
+    display: flex;
+    justify-content: space-between;
+
+    h1 {
+      display: inline-block;
+      margin-right: 20px;
+      font-size: 50px;
+      color: white;
+      padding: 5px 0;
+    }
+
+    .details {
+      display: flex;
+      align-items: center;
+      padding: 5px 20px;
+      margin-right: 5px;
+
+      p {
+        font-size: 25px;
+      }
+
+      img:first-of-type {
+        transform: rotate(180deg);
+      }
+
+      img {
+        cursor: pointer;
+        width: auto;
+        height: 30px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1650px) {
+  .main-wrapper {
+    max-width: 90%;
+    margin: 10px auto 20px;
+
+    .title {
+      margin-top: 0;
+    }
+  }
+}
+
+@media only screen and (max-width: 891px) {
+  .main-wrapper {
+    max-width: 94%;
+
+    .title {
+      flex-wrap: wrap;
+
+      h1 {
+        font-size: 40px;
+      }
+      
+      .details {
+        padding: 0;
+
+        p {
+          font-size: 20px;
+        }
+
+        img {
+          height: 20px;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 675px) {
+  .notes-wrapper {
+    display: none;
+  }
+
+  .main-wrapper {
+    .title {
+
+      h1 {
+        font-size: 30px;
+      }
+      
+      .details {
+        p {
+          font-size: 18px;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 555px) {
+  .main-wrapper {
+    .title {
+      h1 {
+        font-size: 25px;
+      }
+      
+      .details {
+        p {
+          font-size: 16px;
+        }
+
+        img {
+          height: 16px;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 472px) {
+  .main-wrapper {
+    .title {
+      h1 {
+        font-size: 22px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 440px) {
+  .main-wrapper {
+    .title {
+      h1 {
+        font-size: 20px;
+      }
+
+      .details {
+        p {
+          font-size: 15px;
+        }
+
+        img {
+          height: 15px;
+        }
+      }
+    }
+  }
+}
