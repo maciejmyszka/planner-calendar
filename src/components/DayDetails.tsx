@@ -1,19 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useContext, FC } from "react";
 import AddTask from "./AddTask";
 import SingleTask from "./SingleTask";
 import close from "../images/close.svg";
+import { DateContext } from "../context/dateContext";
+import { TasksContext } from "../context/tasksContext";
 
-const DayDetails = ({
-  day,
-  month,
-  setShowDayDetails,
-  tasks,
-  setTasks,
-  date,
-}: any) => {
-  const [actionType, setActionType] = useState("AddTask");
+interface Task {
+  id: number;
+  title: string;
+  text: string;
+  time: string;
+  priority: boolean;
+}
 
-  const setNameMonth = (monthNumber: any) => {
+interface Props {
+  day: number;
+  month: number;
+}
+
+const DayDetails: FC<Props> = ({ day, month }: Props) => {
+  const [actionType, setActionType] = useState<string>("AddTask");
+  const { date } = useContext(DateContext);
+  const { tasks, setShowDayDetails } = useContext(TasksContext);
+
+  const setNameMonth = (monthNumber: number) => {
     switch (monthNumber) {
       case 1:
         return "Styczeń";
@@ -56,16 +66,14 @@ const DayDetails = ({
       </div>
       <div className="tasks-wrapper">
         <div className="tasks">
-          {tasks.map((task: any) => (
+          {tasks.map((task: Task) => (
             <SingleTask
               key={task.id}
-              setTasks={setTasks}
               id={task.id}
               title={task.title}
               text={task.text}
               time={task.time}
               priority={task.priority}
-              tasks={tasks}
             />
           ))}
         </div>
@@ -84,7 +92,7 @@ const DayDetails = ({
               Zaplanuj dzień wolny
             </p>
           </div>
-          {actionType === "AddTask" ? <AddTask setTasks={setTasks} /> : null}
+          {actionType === "AddTask" ? <AddTask /> : null}
         </div>
       </div>
     </div>

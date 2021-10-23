@@ -1,29 +1,44 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext, FC } from "react";
 import DayDetails from "./DayDetails";
+import { DateContext } from "../context/dateContext";
+import { TasksContext, defaultTasks } from "../context/tasksContext";
 
-const SingleDay = ({ day, month, date }: any) => {
-  const [tasks, setTasks] = useState([]);
-  const [showDayDetails, setShowDayDetails] = useState(false);
-  const [width, setWidth] = useState(window.innerWidth);
+interface Props {
+  day: number;
+  month: number;
+}
+
+interface Task {
+  id: number;
+  title: string;
+  text: string;
+  time: string;
+  priority: boolean;
+}
+
+const SingleDay: FC<Props> = ({ day, month }: Props) => {
+  const [tasks, setTasks] = useState<Array<Task>>(defaultTasks.tasks);
+  const [showDayDetails, setShowDayDetails] = useState<boolean>(defaultTasks.showDayDetails);
+  const { date, width } = useContext(DateContext);
 
   const customId = month === 10 || month === 11 || month === 12 ? "ab" : "";
 
-  let newDate = new Date();
-  let actualMonth = newDate.getMonth() + 1;
-  let actualYear = newDate.getFullYear();
-
-  useEffect(() => {
-    function handleResize() {
-      setWidth(window.innerWidth);
-    }
-    window.addEventListener("resize", handleResize);
-  }, []);
+  let newDate: Date = new Date();
+  let actualMonth: number = newDate.getMonth() + 1;
+  let actualYear: number = newDate.getFullYear();
 
   return (
-    <>
+    <TasksContext.Provider
+      value={{
+        tasks,
+        setTasks,
+        showDayDetails,
+        setShowDayDetails,
+      }}
+    >
       <div
         className="day-wrapper"
-        onClick={() => setShowDayDetails((prevState) => !prevState)}
+        onClick={() => setShowDayDetails((prevState: boolean) => !prevState)}
         id={`a${day}${month}${customId}`}
       >
         <div className="day-number">
@@ -41,7 +56,7 @@ const SingleDay = ({ day, month, date }: any) => {
         </div>
         <div className="tasks">
           {width > 650 &&
-            tasks.slice(0, width < 800 ? 1 : 2).map((task: any) => (
+            tasks.slice(0, width < 800 ? 1 : 2).map((task: Task) => (
               <p key={task.id}>
                 {width < 865 ? "" : task.time} {task.title}
               </p>
@@ -54,17 +69,8 @@ const SingleDay = ({ day, month, date }: any) => {
           ) : null}
         </div>
       </div>
-      {showDayDetails && (
-        <DayDetails
-          tasks={tasks}
-          setTasks={setTasks}
-          day={day}
-          month={month}
-          setShowDayDetails={setShowDayDetails}
-          date={date}
-        />
-      )}
-    </>
+      {showDayDetails && <DayDetails day={day} month={month} />}
+    </TasksContext.Provider>
   );
 };
 

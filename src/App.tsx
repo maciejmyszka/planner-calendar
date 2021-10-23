@@ -1,41 +1,41 @@
-import React, { useState, useEffect } from 'react';
-import Notes from './components/Notes';
+import React, { useState, useEffect, FC } from "react";
+import Notes from "./components/Notes";
+import SingleMonth from "./components/SingleMonth";
+import WeekBar from "./components/WeekBar";
 
-import SingleMonth from './components/SingleMonth';
-import WeekBar from './components/WeekBar';
 import arrow from "./images/arrow.svg";
 
-const App = () => {
-  let newDate = new Date()
-  let actualDate = newDate.getDate();
-  let actualMonth = newDate.getMonth() + 1;
-  let actualYear = newDate.getFullYear();
+import { DateContext, defaultObject } from "./context/dateContext";
 
-  const [date, setDate] = useState({
-    date: actualDate,
-    month: actualMonth,
-    year: actualYear
-  })
+// ToDoList
+// 1. "Zaplanuj dzień wolny"
+// 2. localStorage
 
-  const [showNotes, setShowNotes] = useState(false)
+interface Date {
+  date: number;
+  month: number;
+  year: number;
+}
 
-  const months = 12;
-  let monthsArr: any = [];
+const App: FC = () => {
+  const [date, setDate] = useState<Date>(defaultObject.date);
+  const [width, setWidth] = useState<number>(defaultObject.width);
+  const [showNotes, setShowNotes] = useState<boolean>(false);
 
+  const months: number = 12;
+  let monthsArr: Array<number> = [];
   for (let i = 1; i <= months; i++) {
     monthsArr.push(i);
   }
 
-  const [width, setWidth] = useState(window.innerWidth)
-
   useEffect(() => {
-    function handleResize() {
+    const handleResize = () => {
       setWidth(window.innerWidth);
     }
     window.addEventListener("resize", handleResize);
   }, []);
 
-  const setNameMonth = (monthNumber: any) => {
+  const setNameMonth = (monthNumber: number) => {
     switch (monthNumber) {
       case 1:
         return "Styczeń";
@@ -60,64 +60,89 @@ const App = () => {
       case 11:
         return "Listopad";
       case 12:
-        return "Grudzień"
+        return "Grudzień";
     }
-  }
+  };
 
   const nextMonth = () => {
     if (date.month === 12) {
-      const newDate = {
+      const newDate: Date = {
         ...date,
         month: 1,
-        year: date.year + 1
-      }
-      setDate(newDate)
+        year: date.year + 1,
+      };
+      setDate(newDate);
     } else {
-      const newDate = {
+      const newDate: Date = {
         ...date,
-        month: date.month + 1
-      }
-      setDate(newDate)
+        month: date.month + 1,
+      };
+      setDate(newDate);
     }
-  }
+  };
 
   const prevMonth = () => {
     if (date.month === 1) {
-      const newDate = {
+      const newDate: Date = {
         ...date,
         month: 12,
-        year: date.year - 1
-      }
-      setDate(newDate)
+        year: date.year - 1,
+      };
+      setDate(newDate);
     } else {
-      const newDate = {
+      const newDate: Date = {
         ...date,
-        month: date.month - 1
-      }
-      setDate(newDate)
+        month: date.month - 1,
+      };
+      setDate(newDate);
     }
-  }
+  };
 
   return (
-    <div style={{ position: "relative" }} >
-      <div className="notes-wrapper">
-        {!showNotes && <p className="shortcut" onClick={() => setShowNotes(prevState => !prevState)}>Notatki</p>}
-        {showNotes && <Notes setShowNotes={setShowNotes} />}
-      </div>
-      <div className="main-wrapper" style={{ filter: showNotes ? "blur(5px)" : "none", pointerEvents: showNotes ? "none" : "unset" }}>
-        <div className="title">
-          <h1>Kalendarz / Planner</h1>
-          <div className="details">
-            <img src={arrow} alt="previous" onClick={() => prevMonth()} />
-            <p>{setNameMonth(date.month)} {width < 769 && "/ "} {width < 769 && setNameMonth(date.month + 1)} / {date.year}</p>
-            <img src={arrow} alt="next" onClick={() => nextMonth()} />
-          </div>
+    <DateContext.Provider value={{
+      date,
+      setDate,
+      width,
+      setWidth
+    }}>
+      <div style={{ position: "relative" }}>
+        <div className="notes-wrapper">
+          {!showNotes && (
+            <p
+              className="shortcut"
+              onClick={() => setShowNotes((prevState: boolean) => !prevState)}
+            >
+              Notatki
+            </p>
+          )}
+          {showNotes && <Notes setShowNotes={setShowNotes} />}
         </div>
-        <WeekBar />
-        {monthsArr.map((month: any) => <SingleMonth key={month} month={month} date={date} />)}
+        <div
+          className="main-wrapper"
+          style={{
+            filter: showNotes ? "blur(5px)" : "none",
+            pointerEvents: showNotes ? "none" : "unset",
+          }}
+        >
+          <div className="title">
+            <h1>Kalendarz / Planner</h1>
+            <div className="details">
+              <img src={arrow} alt="previous" onClick={() => prevMonth()} />
+              <p>
+                {setNameMonth(date.month)} {width < 769 && "/ "}{" "}
+                {width < 769 && setNameMonth(date.month + 1)} / {date.year}
+              </p>
+              <img src={arrow} alt="next" onClick={() => nextMonth()} />
+            </div>
+          </div>
+          <WeekBar />
+          {monthsArr.map((month: number) => (
+            <SingleMonth key={month} month={month} />
+          ))}
+        </div>
       </div>
-    </div>
+    </DateContext.Provider>
   );
-}
+};
 
 export default App;

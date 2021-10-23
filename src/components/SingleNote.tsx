@@ -1,9 +1,26 @@
-import React from "react";
+import React, { useContext, FC } from "react";
+import { NotesContext } from "../context/notesContext";
 import exit from "../images/exit333.png";
 
-const SingleNote = ({ text, time, date, id, setNotes, notes }: any) => {
+interface Note {
+  id: number;
+  text: string;
+  time: string;
+  date: string;
+}
+
+interface Props {
+  text: string;
+  time: string;
+  date: string;
+  id: number;
+}
+
+const SingleNote: FC<Props> = ({ text, time, date, id }: Props) => {
+  const { notes, setNotes } = useContext(NotesContext);
+
   const onClickDelete = () => {
-    const newNotes = notes.filter((note: any) => note.id !== id);
+    const newNotes = notes.filter((note: Note) => note.id !== id);
     setNotes(newNotes);
   };
 

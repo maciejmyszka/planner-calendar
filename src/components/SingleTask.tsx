@@ -1,18 +1,29 @@
-import React from "react";
+import React, { useContext, FC } from "react";
 import delete_icon from "../images/exit.png";
 import important_delete from "../images/exit_important.png";
+import { TasksContext } from "../context/tasksContext";
 
-const SingleTask = ({
-  title,
-  text,
-  time,
-  priority,
-  setTasks,
-  id,
-  tasks,
-}: any) => {
+interface Task {
+  id: number;
+  title: string;
+  text: string;
+  time: string;
+  priority: boolean;
+}
+
+interface Props {
+  title: string;
+  text: string;
+  time: string;
+  priority: boolean;
+  id: number;
+}
+
+const SingleTask: FC<Props> = ({ title, text, time, priority, id }: Props) => {
+  const { tasks, setTasks } = useContext(TasksContext);
+
   const onClickDelete = () => {
-    const newState = tasks.filter((task: any) => task.id !== id);
+    const newState = tasks.filter((task: Task) => task.id !== id);
     setTasks(newState);
   };
 

@@ -43,3 +43,27 @@
     }
   }
 }
+
+@media only screen and (max-width: 1400px) {
+  .notes-feature {
+    width: 40vw;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .notes-feature {
+    width: 50vw;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .notes-feature {
+    width: 60vw;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .notes-feature {
+    width: 65vw;
+  }
+}

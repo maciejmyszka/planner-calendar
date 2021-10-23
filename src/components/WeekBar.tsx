@@ -1,14 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, FC } from "react";
+import { DateContext } from "../context/dateContext";
 
-const WeekBar = () => {
-  const [width, setWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    function handleResize() {
-      setWidth(window.innerWidth);
-    }
-    window.addEventListener("resize", handleResize);
-  }, []);
+const WeekBar: FC = () => {
+  const { width } = useContext(DateContext)
 
   return (
     <div className="weekbar">

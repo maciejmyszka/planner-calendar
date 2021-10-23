@@ -1,7 +1,11 @@
-import React from "react";
+import React, { Dispatch, FC } from "react";
 import close from "../images/close.svg";
 
-const Alert = ({ setShowAlert }: any) => {
+interface Props {
+  setShowAlert: Dispatch<boolean>;
+}
+
+const Alert: FC<Props> = ({ setShowAlert }: Props) => {
   return (
     <div className="alert-wrapper">
       <div className="alert-header">
