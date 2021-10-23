@@ -4,6 +4,7 @@ import SingleTask from "./SingleTask";
 import close from "../images/close.svg";
 import { DateContext } from "../context/dateContext";
 import { TasksContext } from "../context/tasksContext";
+import Free from "./Free";
 
 interface Task {
   id: number;
@@ -52,6 +53,9 @@ const DayDetails: FC<Props> = ({ day, month }: Props) => {
     }
   };
 
+  const prioTasks = tasks.filter((task: Task) => task.priority);
+  const noPrioTasks = tasks.filter((task: Task) => !task.priority);
+
   return (
     <div className="day-details-wrapper">
       <div className="top-wrapper">
@@ -66,7 +70,17 @@ const DayDetails: FC<Props> = ({ day, month }: Props) => {
       </div>
       <div className="tasks-wrapper">
         <div className="tasks">
-          {tasks.map((task: Task) => (
+          {prioTasks.map((task: Task) => (
+            <SingleTask
+              key={task.id}
+              id={task.id}
+              title={task.title}
+              text={task.text}
+              time={task.time}
+              priority={task.priority}
+            />
+          ))}
+          {noPrioTasks.map((task: Task) => (
             <SingleTask
               key={task.id}
               id={task.id}
@@ -93,6 +107,7 @@ const DayDetails: FC<Props> = ({ day, month }: Props) => {
             </p>
           </div>
           {actionType === "AddTask" ? <AddTask /> : null}
+          {actionType === "Free" ? <Free /> : null}
         </div>
       </div>
     </div>

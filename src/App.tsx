@@ -8,8 +8,7 @@ import arrow from "./images/arrow.svg";
 import { DateContext, defaultObject } from "./context/dateContext";
 
 // ToDoList
-// 1. "Zaplanuj dzień wolny"
-// 2. localStorage
+// 1. localStorage
 
 interface Date {
   date: number;
@@ -31,7 +30,7 @@ const App: FC = () => {
   useEffect(() => {
     const handleResize = () => {
       setWidth(window.innerWidth);
-    }
+    };
     window.addEventListener("resize", handleResize);
   }, []);
 
@@ -99,12 +98,14 @@ const App: FC = () => {
   };
 
   return (
-    <DateContext.Provider value={{
-      date,
-      setDate,
-      width,
-      setWidth
-    }}>
+    <DateContext.Provider
+      value={{
+        date,
+        setDate,
+        width,
+        setWidth,
+      }}
+    >
       <div style={{ position: "relative" }}>
         <div className="notes-wrapper">
           {!showNotes && (

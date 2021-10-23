@@ -13,6 +13,8 @@ interface Default {
   setTasks: Dispatch<Array<Task>>;
   showDayDetails: boolean;
   setShowDayDetails: Dispatch<boolean>;
+  freeDay: boolean;
+  setFreeDay: Dispatch<boolean>
 }
 
 export const defaultTasks: Default = {
@@ -20,6 +22,8 @@ export const defaultTasks: Default = {
   setTasks: () => {},
   showDayDetails: false,
   setShowDayDetails: () => {},
+  freeDay: false,
+  setFreeDay: () => {}
 };
 
 export const TasksContext = createContext(defaultTasks);
