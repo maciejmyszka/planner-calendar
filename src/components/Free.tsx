@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
+import React, { useContext, FC } from "react";
 import { TasksContext } from "../context/tasksContext";
 
-const Free = () => {
+const Free: FC = () => {
   const { freeDay, setFreeDay } = useContext(TasksContext);
 
   return (

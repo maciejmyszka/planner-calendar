@@ -1,4 +1,4 @@
-import React, { useState, useContext, FC } from "react";
+import React, { useState, useContext, useEffect, FC } from "react";
 import DayDetails from "./DayDetails";
 import { DateContext } from "../context/dateContext";
 import { TasksContext, defaultTasks } from "../context/tasksContext";
@@ -30,11 +30,34 @@ const SingleDay: FC<Props> = ({ day, month }: Props) => {
   let actualMonth: number = newDate.getMonth() + 1;
   let actualYear: number = newDate.getFullYear();
 
-  const sortedTasks = tasks.filter((task: Task) => !task.priority);
-  const prioTasks = tasks.filter((task: Task) => task.priority);
+  const sortedTasks: Array<Task> = tasks.filter((task: Task) => !task.priority);
+  const prioTasks: Array<Task> = tasks.filter((task: Task) => task.priority);
   for (let i = 0; i < prioTasks.length; i++) {
     sortedTasks.unshift(prioTasks[i]);
   }
+
+  useEffect(() => {
+    const data = localStorage.getItem(`tasks${day}${month}`);
+    if (data) {
+      setTasks(JSON.parse(data));
+    }
+  }, [day, month]);
+
+  useEffect(() => {
+    localStorage.setItem(`tasks${day}${month}`, JSON.stringify(tasks));
+  });
+
+  useEffect(() => {
+    const data = localStorage.getItem(`free${day}${month}`);
+    if (data) {
+      setFreeDay(JSON.parse(data));
+    }
+  }, [day, month]);
+
+  useEffect(() => {
+    localStorage.setItem(`free${day}${month}`, JSON.stringify(freeDay));
+  });
+
 
   return (
     <TasksContext.Provider
