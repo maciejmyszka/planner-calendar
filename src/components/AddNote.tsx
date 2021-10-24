@@ -24,8 +24,12 @@ const AddNote: FC = () => {
     let date: number = newDate.getDate();
     let month: number = newDate.getMonth();
     let year: number = newDate.getFullYear();
-    const actualTime: string = `${hours <= 9 ? 0 : ""}${hours}:${minutes <= 9 ? 0 : ""}${minutes}`;
-    const actualDate: string = `${date <= 9 ? 0 : ""}${date}.${month <= 9 ? 0 : ""}${month}.${year}`;
+    const actualTime: string = `${hours <= 9 ? 0 : ""}${hours}:${
+      minutes <= 9 ? 0 : ""
+    }${minutes}`;
+    const actualDate: string = `${date <= 9 ? 0 : ""}${date}.${
+      month <= 9 ? 0 : ""
+    }${month}.${year}`;
     setTime(actualTime);
     setDate(actualDate);
   }, []);
@@ -39,7 +43,7 @@ const AddNote: FC = () => {
     };
     setNotes(notes.concat(newNote));
     setText("");
-    setSuccess((prevState:boolean) => !prevState)
+    setSuccess((prevState: boolean) => !prevState);
   };
 
   return (
@@ -50,7 +54,13 @@ const AddNote: FC = () => {
         onChange={(e: ChangeEvent<any>) => setText(e.target.value)}
         placeholder="Tutaj wpisz treść notatki..."
       ></textarea>
-      <button onClick={() => onClickAddNote()}>Dodaj</button>
+      <button
+        disabled={text.length === 0 ? true : false}
+        style={{ cursor: text.length === 0 ? "default" : "pointer" }}
+        onClick={() => onClickAddNote()}
+      >
+        Dodaj
+      </button>
       {success && <Alert type="success" closeFunc={setSuccess} />}
     </div>
   );
