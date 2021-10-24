@@ -21,7 +21,7 @@ interface Props {
 
 const DayDetails: FC<Props> = ({ day, month }: Props) => {
   const [actionType, setActionType] = useState<string>("AddTask");
-  const { date } = useContext(DateContext);
+  const { date, width } = useContext(DateContext);
   const { tasks, setShowDayDetails } = useContext(TasksContext);
 
   const setNameMonth = (monthNumber: number) => {
@@ -57,7 +57,7 @@ const DayDetails: FC<Props> = ({ day, month }: Props) => {
   const noPrioTasks = tasks.filter((task: Task) => !task.priority);
 
   return (
-    <div className="day-details-wrapper">
+    <div className={width > 891 ? "day-details-wrapper flip-in-hor-bottom" : "day-details-wrapper"}>
       <div className="top-wrapper">
         <h2>
           {day} {setNameMonth(month)} {date.year}r.
