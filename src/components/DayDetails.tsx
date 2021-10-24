@@ -24,7 +24,7 @@ const DayDetails: FC<Props> = ({ day, month }: Props) => {
   const { date, width } = useContext(DateContext);
   const { tasks, setShowDayDetails } = useContext(TasksContext);
 
-  const setNameMonth = (monthNumber: number) => {
+  const setMonthName = (monthNumber: number) => {
     switch (monthNumber) {
       case 1:
         return "Styczeń";
@@ -60,7 +60,7 @@ const DayDetails: FC<Props> = ({ day, month }: Props) => {
     <div className={width > 891 ? "day-details-wrapper flip-in-hor-bottom" : "day-details-wrapper"}>
       <div className="top-wrapper">
         <h2>
-          {day} {setNameMonth(month)} {date.year}r.
+          {day} {setMonthName(month)} {date.year}r.
         </h2>
         <img
           src={close}

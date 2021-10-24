@@ -2,7 +2,7 @@ import React, { useContext, FC } from "react";
 import { DateContext } from "../context/dateContext";
 
 const WeekBar: FC = () => {
-  const { width } = useContext(DateContext)
+  const { width } = useContext(DateContext);
 
   return (
     <div className="weekbar">

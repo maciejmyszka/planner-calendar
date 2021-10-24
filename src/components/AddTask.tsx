@@ -1,4 +1,10 @@
-import React, { useState, useContext, FC, MouseEvent, ChangeEvent } from "react";
+import React, {
+  useState,
+  useContext,
+  FC,
+  MouseEvent,
+  ChangeEvent,
+} from "react";
 import { DateContext } from "../context/dateContext";
 import { TasksContext } from "../context/tasksContext";
 import Alert from "./Alert";
@@ -12,7 +18,7 @@ interface Task {
 }
 
 const AddTask: FC = () => {
-  const {width} = useContext(DateContext)
+  const { width } = useContext(DateContext);
   const { setTasks, tasks } = useContext(TasksContext);
   const [text, setText] = useState<string>("");
   const [title, setTitle] = useState<string>("");
@@ -42,7 +48,11 @@ const AddTask: FC = () => {
   };
 
   return (
-    <div className={width > 891 ? "form-wrapper swing-in-right-fwd" : "form-wrapper"}>
+    <div
+      className={
+        width > 891 ? "form-wrapper swing-in-right-fwd" : "form-wrapper"
+      }
+    >
       <p>Wpisz tytuł zadania</p>
       <input
         type="text"
@@ -54,7 +64,9 @@ const AddTask: FC = () => {
       <input
         type="time"
         value={time}
-        onChange={(e: ChangeEvent<any>) => {setTime(e.target.value)}}
+        onChange={(e: ChangeEvent<any>) => {
+          setTime(e.target.value);
+        }}
       />
       <p>Wpisz notatkę do zadania</p>
       <input
@@ -71,7 +83,9 @@ const AddTask: FC = () => {
           onChange={(e: ChangeEvent<any>) => setPriority(e.target.checked)}
         />
       </label>
-      <button onClick={(e: MouseEvent) => addTask(e)}>Dodaj zadanie do listy</button>
+      <button onClick={(e: MouseEvent) => addTask(e)}>
+        Dodaj zadanie do listy
+      </button>
       {showAlert && <Alert setShowAlert={setShowAlert} />}
     </div>
   );

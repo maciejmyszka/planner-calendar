@@ -22,7 +22,7 @@ interface Props {
 
 const SingleTask: FC<Props> = ({ title, text, time, priority, id }: Props) => {
   const { tasks, setTasks } = useContext(TasksContext);
-  const {width} = useContext(DateContext)
+  const { width } = useContext(DateContext);
 
   const onClickDelete = () => {
     const newState = tasks.filter((task: Task) => task.id !== id);
@@ -31,7 +31,11 @@ const SingleTask: FC<Props> = ({ title, text, time, priority, id }: Props) => {
 
   return (
     <div
-      className={width > 891 ? "single-task-wrapper slide-in-left" :"single-task-wrapper"}
+      className={
+        width > 891
+          ? "single-task-wrapper slide-in-left"
+          : "single-task-wrapper"
+      }
       style={{
         color: priority ? "#E72020" : "unset",
         borderColor: priority ? "#E72020" : "unset",

@@ -22,15 +22,15 @@ const Notes: FC<Props> = ({ setShowNotes }: Props) => {
   const [actionType, setActionType] = useState<string>("show");
 
   useEffect(() => {
-    const data = localStorage.getItem("notes")
+    const data = localStorage.getItem("notes");
     if (data) {
-      setNotes(JSON.parse(data))
+      setNotes(JSON.parse(data));
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
-    localStorage.setItem("notes", JSON.stringify(notes))
-  })
+    localStorage.setItem("notes", JSON.stringify(notes));
+  });
 
   return (
     <NotesContext.Provider
