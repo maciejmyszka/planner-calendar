@@ -106,8 +106,8 @@ const DayDetails: FC<Props> = ({ day, month }: Props) => {
               Zaplanuj dzień wolny
             </p>
           </div>
-          {actionType === "AddTask" ? <AddTask /> : null}
-          {actionType === "Free" ? <Free /> : null}
+          {actionType === "AddTask" && <AddTask />}
+          {actionType === "Free" && <Free />}
         </div>
       </div>
     </div>

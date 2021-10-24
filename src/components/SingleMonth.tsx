@@ -17,10 +17,11 @@ const SingleMonth: FC<Props> = ({ month, year }: Props) => {
   }
 
   const mobileRule = width < 769 && date.month + 1 === month;
+  const correctYear = date.month === month;
 
   return (
     <div
-      style={{ display: date.month === month || mobileRule ? "flex" : "none" }}
+      style={{ display: correctYear || mobileRule ? "flex" : "none" }}
       className={width > 891 ? "month-wrapper slide-in-left" : "month-wrapper"}
     >
       {daysArr.map((day: number) => (

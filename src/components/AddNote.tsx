@@ -24,19 +24,15 @@ const AddNote: FC = () => {
     let date: number = newDate.getDate();
     let month: number = newDate.getMonth();
     let year: number = newDate.getFullYear();
-    const actualTime: string = `${hours <= 9 ? 0 : ""}${hours}:${
-      minutes <= 9 ? 0 : ""
-    }${minutes}`;
-    const actualDate: string = `${date <= 9 ? 0 : ""}${date}.${
-      month <= 9 ? 0 : ""
-    }${month}.${year}`;
+    const actualTime: string = `${hours <= 9 ? 0 : ""}${hours}:${minutes <= 9 ? 0 : "" }${minutes}`;
+    const actualDate: string = `${date <= 9 ? 0 : ""}${date}.${month <= 9 ? 0 : ""}${month}.${year}`;
     setTime(actualTime);
     setDate(actualDate);
   }, []);
 
-  const onClickAddNote = () => {
+  const handleAddNote = () => {
     const newNote: Note = {
-      id: Math.floor(Math.random() * 1234),
+      id: notes.length,
       text,
       time,
       date,
@@ -57,7 +53,7 @@ const AddNote: FC = () => {
       <button
         disabled={text.length === 0 ? true : false}
         style={{ cursor: text.length === 0 ? "default" : "pointer" }}
-        onClick={() => onClickAddNote()}
+        onClick={() => handleAddNote()}
       >
         Dodaj
       </button>

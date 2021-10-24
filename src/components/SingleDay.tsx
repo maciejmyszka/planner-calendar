@@ -19,13 +19,12 @@ interface Task {
 
 const SingleDay: FC<Props> = ({ day, month, year }: Props) => {
   const [tasks, setTasks] = useState<Array<Task>>(defaultTasks.tasks);
+  const [freeDay, setFreeDay] = useState(defaultTasks.freeDay);
   const [showDayDetails, setShowDayDetails] = useState<boolean>(
     defaultTasks.showDayDetails
   );
-  const [freeDay, setFreeDay] = useState(defaultTasks.freeDay);
-  const { date, width } = useContext(DateContext);
 
-  const customId = month === 10 || month === 11 || month === 12 ? "ab" : "";
+  const { date, width } = useContext(DateContext);
 
   let newDate: Date = new Date();
   let actualMonth: number = newDate.getMonth() + 1;
@@ -37,27 +36,56 @@ const SingleDay: FC<Props> = ({ day, month, year }: Props) => {
     sortedTasks.unshift(prioTasks[i]);
   }
 
+  let tasksUniqueId = `tasks${day}${month}${year}`;
+  let isFreeUniqueId = `free${day}${month}${year}`;
+  const customId = month === 10 || month === 11 || month === 12 ? "ab" : "";
+
   useEffect(() => {
-    const data = localStorage.getItem(`tasks${day}${month}${year}`);
+    const data = localStorage.getItem(tasksUniqueId);
     if (data) {
       setTasks(JSON.parse(data));
     }
-  }, [day, month, year]);
+  }, [tasksUniqueId]);
 
   useEffect(() => {
-    localStorage.setItem(`tasks${day}${month}${year}`, JSON.stringify(tasks));
+    localStorage.setItem(tasksUniqueId, JSON.stringify(tasks));
   });
 
   useEffect(() => {
-    const data = localStorage.getItem(`free${day}${month}${year}`);
+    const data = localStorage.getItem(isFreeUniqueId);
     if (data) {
       setFreeDay(JSON.parse(data));
     }
-  }, [day, month, year]);
+  }, [isFreeUniqueId]);
 
   useEffect(() => {
-    localStorage.setItem(`free${day}${month}${year}`, JSON.stringify(freeDay));
+    localStorage.setItem(isFreeUniqueId, JSON.stringify(freeDay));
   });
+
+  const todayCheck =
+    day === date.date && month === actualMonth && actualYear === date.year
+      ? "today"
+      : "";
+
+  const backgroundRule =
+    (freeDay ? "#5BD442" : "") || (tasks.length >= 1 ? "#4287D4" : "");
+
+  const tasksList =
+    width > 650 &&
+    sortedTasks.length > 0 &&
+    sortedTasks.slice(0, width < 800 ? 1 : 2).map((task: Task) => (
+      <p key={task.id} style={{ color: task.priority ? "#E72020" : "" }}>
+        {width < 865 ? "" : task.time} {task.title}
+      </p>
+    ));
+
+  const tasksLeft = width > 650 && tasks.length > (width < 800 ? 1 : 2) && (
+    <p>{tasks.length - (width <= 800 ? 1 : 2)} więcej zadania...</p>
+  );
+
+  const tasksNumberMobile = width <= 650 && tasks.length >= 1 && (
+    <p className="tasksNum">Ilość zadań: {tasks.length}</p>
+  );
 
   return (
     <TasksContext.Provider
@@ -75,40 +103,16 @@ const SingleDay: FC<Props> = ({ day, month, year }: Props) => {
         onClick={() => setShowDayDetails((prevState: boolean) => !prevState)}
         id={`a${day}${month}${customId}`}
         style={{
-          backgroundColor:
-            (freeDay ? "#5BD442" : "") || (tasks.length >= 1 ? "#4287D4" : ""),
+          backgroundColor: backgroundRule,
         }}
       >
         <div className="day-number">
-          <h2
-            className={
-              day === date.date &&
-              month === actualMonth &&
-              actualYear === date.year
-                ? "today"
-                : ""
-            }
-          >
-            {day}
-          </h2>
+          <h2 className={todayCheck}>{day}</h2>
         </div>
         <div className="tasks">
-          {width > 650 &&
-            sortedTasks.length > 0 &&
-            sortedTasks.slice(0, width < 800 ? 1 : 2).map((task: Task) => (
-              <p
-                key={task.id}
-                style={{ color: task.priority ? "#E72020" : "" }}
-              >
-                {width < 865 ? "" : task.time} {task.title}
-              </p>
-            ))}
-          {width > 650 && tasks.length > (width < 800 ? 1 : 2) ? (
-            <p>{tasks.length - (width <= 800 ? 1 : 2)} więcej zadania...</p>
-          ) : null}
-          {width <= 650 && tasks.length >= 1 ? (
-            <p className="tasksNum">Ilość zadań: {tasks.length}</p>
-          ) : null}
+          {tasksList}
+          {tasksLeft}
+          {tasksNumberMobile}
         </div>
       </div>
       {showDayDetails && <DayDetails day={day} month={month} />}

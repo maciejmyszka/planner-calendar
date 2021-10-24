@@ -26,11 +26,11 @@ const AddTask: FC = () => {
   const [priority, setPriority] = useState<boolean>(false);
   const [showAlert, setShowAlert] = useState<boolean>(false);
 
-  const addTask = (e: MouseEvent) => {
+  const handleAddTask = (e: MouseEvent) => {
     e.preventDefault();
     if (title.length > 0) {
       const newTask: Task = {
-        id: Math.floor(Math.random() * 1234),
+        id: tasks.length,
         title,
         time,
         text,
@@ -83,7 +83,7 @@ const AddTask: FC = () => {
           onChange={(e: ChangeEvent<any>) => setPriority(e.target.checked)}
         />
       </label>
-      <button onClick={(e: MouseEvent) => addTask(e)}>
+      <button onClick={(e: MouseEvent) => handleAddTask(e)}>
         Dodaj zadanie do listy
       </button>
       {showAlert && <Alert closeFunc={setShowAlert} type="failed" />}

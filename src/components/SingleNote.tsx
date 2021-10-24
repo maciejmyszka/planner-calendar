@@ -19,7 +19,7 @@ interface Props {
 const SingleNote: FC<Props> = ({ text, time, date, id }: Props) => {
   const { notes, setNotes } = useContext(NotesContext);
 
-  const onClickDelete = () => {
+  const handleDeleteNote = () => {
     const newNotes = notes.filter((note: Note) => note.id !== id);
     setNotes(newNotes);
   };
@@ -30,7 +30,7 @@ const SingleNote: FC<Props> = ({ text, time, date, id }: Props) => {
         <p>
           Dodane {date} o {time}
         </p>
-        <img src={exit} alt="delete" onClick={() => onClickDelete()} />
+        <img src={exit} alt="delete" onClick={() => handleDeleteNote()} />
       </div>
       <p className="text">{text}</p>
     </div>

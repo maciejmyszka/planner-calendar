@@ -24,7 +24,7 @@ const SingleTask: FC<Props> = ({ title, text, time, priority, id }: Props) => {
   const { tasks, setTasks } = useContext(TasksContext);
   const { width } = useContext(DateContext);
 
-  const onClickDelete = () => {
+  const handleDeleteTask = () => {
     const newState = tasks.filter((task: Task) => task.id !== id);
     setTasks(newState);
   };
@@ -52,7 +52,7 @@ const SingleTask: FC<Props> = ({ title, text, time, priority, id }: Props) => {
         <img
           src={priority === true ? important_delete : delete_icon}
           alt="exit"
-          onClick={() => onClickDelete()}
+          onClick={() => handleDeleteTask()}
         />
       </div>
     </div>
