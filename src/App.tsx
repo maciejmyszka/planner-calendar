@@ -1,14 +1,11 @@
 import React, { useState, useEffect, FC } from "react";
 import Notes from "./components/Notes";
-import SingleMonth from "./components/SingleMonth";
 import WeekBar from "./components/WeekBar";
 
 import arrow from "./images/arrow.svg";
 
 import { DateContext, defaultObject } from "./context/dateContext";
-
-// ToDoList
-// 1. localStorage
+import SingleYear from "./components/SingleYear";
 
 interface Date {
   date: number;
@@ -21,11 +18,12 @@ const App: FC = () => {
   const [width, setWidth] = useState<number>(defaultObject.width);
   const [showNotes, setShowNotes] = useState<boolean>(false);
 
-  const months: number = 12;
-  let monthsArr: Array<number> = [];
-  for (let i = 1; i <= months; i++) {
-    monthsArr.push(i);
+  const years: number = date.year + 10;
+  let yearsArr:Array<number> = [];
+  for (let i = date.year - 10; i <= years; i++) {
+    yearsArr.push(i)
   }
+  const properYear = yearsArr.filter((year:number) => year === date.year)
 
   useEffect(() => {
     const handleResize = () => {
@@ -137,9 +135,7 @@ const App: FC = () => {
             </div>
           </div>
           <WeekBar />
-          {monthsArr.map((month: number) => (
-            <SingleMonth key={month} month={month} />
-          ))}
+          {properYear.map((year: any) => <SingleYear key={year} year={year} />)}
         </div>
       </div>
     </DateContext.Provider>

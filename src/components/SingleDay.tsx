@@ -6,6 +6,7 @@ import { TasksContext, defaultTasks } from "../context/tasksContext";
 interface Props {
   day: number;
   month: number;
+  year: number;
 }
 
 interface Task {
@@ -16,7 +17,7 @@ interface Task {
   priority: boolean;
 }
 
-const SingleDay: FC<Props> = ({ day, month }: Props) => {
+const SingleDay: FC<Props> = ({ day, month, year }: Props) => {
   const [tasks, setTasks] = useState<Array<Task>>(defaultTasks.tasks);
   const [showDayDetails, setShowDayDetails] = useState<boolean>(
     defaultTasks.showDayDetails
@@ -37,27 +38,26 @@ const SingleDay: FC<Props> = ({ day, month }: Props) => {
   }
 
   useEffect(() => {
-    const data = localStorage.getItem(`tasks${day}${month}`);
+    const data = localStorage.getItem(`tasks${day}${month}${year}`);
     if (data) {
       setTasks(JSON.parse(data));
     }
-  }, [day, month]);
+  }, [day, month, year]);
 
   useEffect(() => {
-    localStorage.setItem(`tasks${day}${month}`, JSON.stringify(tasks));
+    localStorage.setItem(`tasks${day}${month}${year}`, JSON.stringify(tasks));
   });
 
   useEffect(() => {
-    const data = localStorage.getItem(`free${day}${month}`);
+    const data = localStorage.getItem(`free${day}${month}${year}`);
     if (data) {
       setFreeDay(JSON.parse(data));
     }
-  }, [day, month]);
+  }, [day, month, year]);
 
   useEffect(() => {
-    localStorage.setItem(`free${day}${month}`, JSON.stringify(freeDay));
+    localStorage.setItem(`free${day}${month}${year}`, JSON.stringify(freeDay));
   });
-
 
   return (
     <TasksContext.Provider

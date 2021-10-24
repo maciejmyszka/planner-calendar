@@ -4,10 +4,11 @@ import SingleDay from "./SingleDay";
 
 interface Props {
   month: number;
+  year: any;
 }
 
-const SingleMonth: FC<Props> = ({ month }: Props) => {
-  const {date, width } = useContext(DateContext)
+const SingleMonth: FC<Props> = ({ month, year }: Props) => {
+  const { date, width } = useContext(DateContext);
 
   const days: number = 30;
   const daysArr: Array<number> = [];
@@ -23,7 +24,7 @@ const SingleMonth: FC<Props> = ({ month }: Props) => {
       className={width >= 891 ? "month-wrapper slide-in-left" : "month-wrapper"}
     >
       {daysArr.map((day: number) => (
-        <SingleDay key={day} day={day} month={month} />
+        <SingleDay key={day} day={day} month={month} year={year} />
       ))}
     </div>
   );
