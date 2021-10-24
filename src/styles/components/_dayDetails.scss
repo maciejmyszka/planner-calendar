@@ -1,7 +1,6 @@
 .day-details-wrapper {
   position: absolute;
   width: 80%;
-  min-height: 106%;
   background: rgb(79, 79, 79);
   background: -moz-linear-gradient(
     270deg,
@@ -25,6 +24,7 @@
   z-index: 1;
   padding: 10px;
   border: 2px solid white;
+  min-height: 636px;
 
   .top-wrapper {
     display: flex;
@@ -81,8 +81,9 @@
 }
 
 .flip-in-hor-bottom {
-	-webkit-animation: flip-in-hor-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-	        animation: flip-in-hor-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  -webkit-animation: flip-in-hor-bottom 0.5s
+    cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: flip-in-hor-bottom 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 /* ----------------------------------------------
@@ -97,31 +98,30 @@
  * animation flip-in-hor-bottom
  * ----------------------------------------
  */
- @-webkit-keyframes flip-in-hor-bottom {
+@-webkit-keyframes flip-in-hor-bottom {
   0% {
     -webkit-transform: rotateX(80deg);
-            transform: rotateX(80deg);
+    transform: rotateX(80deg);
     opacity: 0;
   }
   100% {
     -webkit-transform: rotateX(0);
-            transform: rotateX(0);
+    transform: rotateX(0);
     opacity: 1;
   }
 }
 @keyframes flip-in-hor-bottom {
   0% {
     -webkit-transform: rotateX(80deg);
-            transform: rotateX(80deg);
+    transform: rotateX(80deg);
     opacity: 0;
   }
   100% {
     -webkit-transform: rotateX(0);
-            transform: rotateX(0);
+    transform: rotateX(0);
     opacity: 1;
   }
 }
-
 
 @media only screen and (max-width: 1700px) {
   .day-details-wrapper {
@@ -166,8 +166,8 @@
     width: 98%;
     left: 0%;
     right: 5%;
-    min-height: 84%;
-    top: 5.5%;
+    top: 1.5%;
+    min-height: 520px;
 
     .tasks-wrapper {
       .actions-wrapper {
@@ -208,15 +208,24 @@
 
 @media only screen and (max-width: 768px) {
   .day-details-wrapper {
-    min-height: 62%;
-    top: 18.5%;
-    position: fixed;
+    min-height: 480px;
+    top: 23vh;
+
+    .tasks-wrapper {
+      .actions-wrapper {
+        width: 44%;
+      }
+
+      .tasks {
+        width: 51%;
+      }
+    }
   }
 }
 
 @media only screen and (max-width: 690px) {
   .day-details-wrapper {
-    min-height: 56.5%;
+    min-height: 43%;
 
     .tasks-wrapper {
       flex-direction: column;

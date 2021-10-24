@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext, FC, ChangeEvent } from "react";
 import { NotesContext } from "../context/notesContext";
+import Alert from "./Alert";
 
 interface Note {
   id: number;
@@ -12,6 +13,7 @@ const AddNote: FC = () => {
   const [text, setText] = useState<string>("");
   const [time, setTime] = useState<string>("");
   const [date, setDate] = useState<string>("");
+  const [success, setSuccess] = useState<boolean>(false);
 
   const { setNotes, notes } = useContext(NotesContext);
 
@@ -37,6 +39,7 @@ const AddNote: FC = () => {
     };
     setNotes(notes.concat(newNote));
     setText("");
+    setSuccess((prevState:boolean) => !prevState)
   };
 
   return (
@@ -45,8 +48,10 @@ const AddNote: FC = () => {
       <textarea
         value={text}
         onChange={(e: ChangeEvent<any>) => setText(e.target.value)}
+        placeholder="Tutaj wpisz treść notatki..."
       ></textarea>
       <button onClick={() => onClickAddNote()}>Dodaj</button>
+      {success && <Alert type="success" closeFunc={setSuccess} />}
     </div>
   );
 };

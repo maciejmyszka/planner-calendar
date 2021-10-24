@@ -86,7 +86,7 @@ const AddTask: FC = () => {
       <button onClick={(e: MouseEvent) => addTask(e)}>
         Dodaj zadanie do listy
       </button>
-      {showAlert && <Alert setShowAlert={setShowAlert} />}
+      {showAlert && <Alert closeFunc={setShowAlert} type="failed" />}
     </div>
   );
 };
