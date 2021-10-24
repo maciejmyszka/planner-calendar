@@ -94,6 +94,7 @@
     width: 80%;
     left: 10%;
     right: 10%;
+    min-height: 555px;
   }
 }
 
@@ -141,9 +142,10 @@
 @media only screen and (max-width: 891px) {
   .day-details-wrapper {
     width: 92.2%;
+    top: 16.5%;
     left: 3%;
     right: 3%;
-    min-height: 84%;
+    min-height: 465px;
 
     .tasks-wrapper {
       width: 94%;
@@ -164,7 +166,7 @@
 @media only screen and (max-width: 768px) {
   .day-details-wrapper {
     min-height: 62%;
-    top: 14.5%;
+    top: 18.5%;
     position: fixed;
   }
 }

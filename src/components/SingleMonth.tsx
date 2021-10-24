@@ -21,7 +21,7 @@ const SingleMonth: FC<Props> = ({ month, year }: Props) => {
   return (
     <div
       style={{ display: date.month === month || mobileRule ? "flex" : "none" }}
-      className={width >= 891 ? "month-wrapper slide-in-left" : "month-wrapper"}
+      className={width > 891 ? "month-wrapper slide-in-left" : "month-wrapper"}
     >
       {daysArr.map((day: number) => (
         <SingleDay key={day} day={day} month={month} year={year} />
